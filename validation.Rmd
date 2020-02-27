@@ -51,7 +51,6 @@ bear_table <- full_join(bear_summary, bear_random_summary)
 ```{r}
 
 bobcat_summary <- bobcat %>%
-  group_by(verbatimScientificName) %>%
   summarize(
     nat_mean = mean(Nat_resistance_2011),
     nat_sd = sd(Nat_resistance_2011),
@@ -78,17 +77,17 @@ fisher_summary <- fisher %>%
   summarize(
     nat_mean = mean(Nat_resistance_2011),
     nat_sd = sd(Nat_resistance_2011),
-    expert_mean = mean(fisher_eo_nlcd_rd_resist_run2),
-    expert_sd = sd(fisher_eo_nlcd_rd_resist_run2)
+    expert_mean = mean(fish_eo_nlcd_rd_resist_run2, na.rm = T),
+    expert_sd = sd(fish_eo_nlcd_rd_resist_run2, na.rm =T)
   )
 
 
 fisher_random_summary <- fisher_random %>%
    summarize(
-    nat_mean = mean(Nat_resistance_2011),
-    nat_sd = sd(Nat_resistance_2011),
-    expert_mean = mean(fisher_eo_nlcd_rd_resist_run2),
-    expert_sd = sd(fisher_eo_nlcd_rd_resist_run2)
+    nat_mean = mean(Nat_resistance_2011, na.rm = T),
+    nat_sd = sd(Nat_resistance_2011, na.rm =T),
+    expert_mean = mean(fish_eo_nlcd_rd_resist_run2, na.rm = T),
+    expert_sd = sd(fish_eo_nlcd_rd_resist_run2, na.rm = T)
   )
 
 fisher_table <- full_join(fisher_summary, fisher_random_summary)
@@ -123,7 +122,7 @@ bobcat_expert_ttest
 
 fisher_nat_ttest <- t.test(fisher$Nat_resistance_2011, fisher_random$Nat_resistance_2011)
 
-fisher_expert_ttest <- t.test(fisher$fisher_eo_nlcd_rd_resist_run2, fisher_random$fisher_eo_nlcd_rd_resist_run2)
+fisher_expert_ttest <- t.test(fisher$fish_eo_nlcd_rd_resist_run2, fisher_random$fish_eo_nlcd_rd_resist_run2)
 
 fisher_nat_ttest
 fisher_expert_ttest
