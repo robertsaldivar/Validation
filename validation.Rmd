@@ -94,3 +94,39 @@ fisher_random_summary <- fisher_random %>%
 fisher_table <- full_join(fisher_summary, fisher_random_summary)
 ```
 
+```{r}
+#Running a test for bears for both naturalness and expert opinion
+
+bear_nat_ttest <- t.test(bear$Nat_resistance_2011, bear_random$Nat_resistance_2011)
+
+bear_expert_ttest <- t.test(bear$bear_eo_nlcd_rd_resist_run2, bear_random$bear_eo_nlcd_rd_resist_run2)
+
+bear_nat_ttest
+bear_expert_ttest
+```
+
+```{r}
+#Running a test for bobcat for both naturalness and expert opinion
+
+bobcat_nat_ttest <- t.test(bobcat$Nat_resistance_2011, bobcat_random$Nat_resistance_2011)
+
+bobcat_expert_ttest <- t.test(bobcat$bobcat_eo_nlcd_rd_resist_run2, bobcat_random$bobcat_eo_nlcd_rd_resist_run2)
+
+bobcat_nat_ttest
+bobcat_expert_ttest
+
+
+```
+
+```{r}
+#Running a test for fishers for both naturalness and expert opinion
+
+fisher_nat_ttest <- t.test(fisher$Nat_resistance_2011, fisher_random$Nat_resistance_2011)
+
+fisher_expert_ttest <- t.test(fisher$fisher_eo_nlcd_rd_resist_run2, fisher_random$fisher_eo_nlcd_rd_resist_run2)
+
+fisher_nat_ttest
+fisher_expert_ttest
+```
+
+
