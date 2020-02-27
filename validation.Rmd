@@ -1,0 +1,96 @@
+---
+title: "validation_RS"
+author: "Robert Saldivar and Nathan Burola"
+date: "February 27, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = F, warning = F)
+```
+
+```{r}
+library(tidyverse)
+library(here)
+library(janitor)
+
+bear <- read_csv(here("validation_data", "Bear_Presence_table.csv"))
+bobcat <- read_csv(here("validation_data", "Bobcat_Presence_table.csv"))
+fisher <- read_csv(here("validation_data", "Fisher_Presence_table.csv"))
+
+bear_random <- read_csv(here("validation_data", "Random_Bear_table.csv"))
+bobcat_random <- read_csv(here("validation_data", "Random_Bobcat_table.csv"))
+fisher_random <- read_csv(here("validation_data", "Random_Fisher_table.csv"))
+
+```
+
+```{r}
+
+bear_summary <- bear %>%
+  group_by(verbatimScientificName) %>%
+  summarize(
+    nat_mean = mean(Nat_resistance_2011),
+    nat_sd = sd(Nat_resistance_2011),
+    expert_mean = mean(bear_eo_nlcd_rd_resist_run2),
+    expert_sd = sd(bear_eo_nlcd_rd_resist_run2)
+  )
+
+
+bear_random_summary <- bear_random %>%
+   summarize(
+    nat_mean = mean(Nat_resistance_2011),
+    nat_sd = sd(Nat_resistance_2011),
+    expert_mean = mean(bear_eo_nlcd_rd_resist_run2),
+    expert_sd = sd(bear_eo_nlcd_rd_resist_run2)
+  )
+
+bear_table <- full_join(bear_summary, bear_random_summary)
+
+```
+
+```{r}
+
+bobcat_summary <- bobcat %>%
+  group_by(verbatimScientificName) %>%
+  summarize(
+    nat_mean = mean(Nat_resistance_2011),
+    nat_sd = sd(Nat_resistance_2011),
+    expert_mean = mean(bobcat_eo_nlcd_rd_resist_run2),
+    expert_sd = sd(bobcat_eo_nlcd_rd_resist_run2)
+  )
+
+
+bobcat_random_summary <- bobcat_random %>%
+   summarize(
+    nat_mean = mean(Nat_resistance_2011),
+    nat_sd = sd(Nat_resistance_2011),
+    expert_mean = mean(bobcat_eo_nlcd_rd_resist_run2),
+    expert_sd = sd(bobcat_eo_nlcd_rd_resist_run2)
+  )
+
+bobcat_table <- full_join(bobcat_summary, bobcat_random_summary)
+
+```
+
+```{r}
+fisher_summary <- fisher %>%
+  group_by(verbatimScientificName) %>%
+  summarize(
+    nat_mean = mean(Nat_resistance_2011),
+    nat_sd = sd(Nat_resistance_2011),
+    expert_mean = mean(fisher_eo_nlcd_rd_resist_run2),
+    expert_sd = sd(fisher_eo_nlcd_rd_resist_run2)
+  )
+
+
+fisher_random_summary <- fisher_random %>%
+   summarize(
+    nat_mean = mean(Nat_resistance_2011),
+    nat_sd = sd(Nat_resistance_2011),
+    expert_mean = mean(fisher_eo_nlcd_rd_resist_run2),
+    expert_sd = sd(fisher_eo_nlcd_rd_resist_run2)
+  )
+
+fisher_table <- full_join(fisher_summary, fisher_random_summary)
+```
+
